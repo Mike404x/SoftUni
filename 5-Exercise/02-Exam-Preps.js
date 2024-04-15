@@ -1,35 +1,35 @@
-function examPreps (input){ {
-        let unsatisfactoryGrades = input[0];
-        let totalScore = 0;
-        let problemCount = 0;
-        let lastProblem = "";
-      
-        for (let i = 0; i < input.length; i += 2) {
-          let problem = input[i];
-          let grade = parseInt(input[i + 1]);
-      
-          if (grade <= 4) {
-            unsatisfactoryGrades--;
-          }
-      
-          totalScore += grade;
-          problemCount++;
-          lastProblem = problem;
-      
-          if (unsatisfactoryGrades === 0 || input[i + 2] === "Enough") {
-            break;
-          }
-        }
-      
-        if (input[input.length - 1] === "Enough") {
-          console.log(`Average score: ${(totalScore / problemCount).toFixed(2)}`);
-          console.log(`Number of problems: ${problemCount}`);
+function examPreparation(input) {
+  let poorGradesLimit = Number(input.shift());
+  let poorGradesCount = 0;
+  let totalGrade = 0;
+  let problemsSolved = 0;
+  let lastProblem = "";
+
+  while (true) {
+      let problem = input.shift();
+      if (problem === "Enough") {
+          let averageScore = totalGrade / problemsSolved;
+          console.log(`Average score: ${averageScore.toFixed(2)}`);
+          console.log(`Number of problems: ${problemsSolved}`);
           console.log(`Last problem: ${lastProblem}`);
-        } else {
-          console.log(`You need a break, ${unsatisfactoryGrades} poor grades.`);
-        }
+          break;
       }
-      
+
+      let grade = Number(input.shift());
+      totalGrade += grade;
+      problemsSolved++;
+      lastProblem = problem;
+
+      if (grade <= 4) {
+          poorGradesCount++;
+          if (poorGradesCount === poorGradesLimit) {
+              console.log(`You need a break, ${poorGradesCount} poor grades.`);
+              break;
+          }
+      }
+  }
 }
-examPreps(["3","Money","6","Story","4","Spring Time","5","Bus","6","Enough"])
-examPreps(["2","Income","3","Game Info","6","Best Player","4"])
+
+// Примерни извиквания на функцията:
+examPreparation(["3", "Money", "6", "Story", "4", "Spring Time", "5", "Bus", "6", "Enough"]);
+examPreparation(["2", "Income", "3", "Game Info", "6", "Best Player", "4"]);
