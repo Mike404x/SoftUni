@@ -1,8 +1,8 @@
-function subs(input) {
-    const K = parseInt(input[0]);
-    const L = parseInt(input[1]);
-    const M = parseInt(input[2]);
-    const N = parseInt(input[3]);
+function substitute(input) {
+    let K = Number(input[0]);
+    let L = Number(input[1]);
+    let M = Number(input[2]);
+    let N = Number(input[3]);
     let count = 0;
 
     for (let f1 = K; f1 <= 8; f1++) {
@@ -14,6 +14,8 @@ function subs(input) {
                             if (count < 6) {
                                 console.log(`${f1}${s1} - ${f2}${s2}`);
                                 count++;
+                            } else {
+                                return;
                             }
                         } else {
                             console.log("Cannot change the same player.");
@@ -25,4 +27,4 @@ function subs(input) {
     }
 }
 
-subs(["7","6","8","5"]);
+substitute([6, 7, 8, 5]);
